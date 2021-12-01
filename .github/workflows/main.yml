@@ -18,4 +18,8 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2 <-- clone https://github.com/meisnate12/Plex-Meta-Manager.git
+      - name: Clone Git repository
+        uses: actions/checkout@v2
+        with:
+          repository: meisnate12/Plex-Meta-Manager
+          fetch-depth: 0
