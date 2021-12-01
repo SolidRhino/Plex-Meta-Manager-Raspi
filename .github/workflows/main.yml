@@ -10,16 +10,22 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  analyze-tags:
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
+    outputs:
+      latest-tag: ${{ steps.latesttag.outputs.tag }}
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Clone Git repository
         uses: actions/checkout@v2
         with:
           repository: meisnate12/Plex-Meta-Manager
           fetch-depth: 0
+
+      - name: Get latest tag
+        id: latesttag
+        uses: "WyriHaximus/github-action-get-previous-tag@v1"
+
+      - name: Echo var
+        id: var
+        shell: bash
+        run: echo "$GITHUB_CONTEXT"
